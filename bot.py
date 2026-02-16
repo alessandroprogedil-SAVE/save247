@@ -7,9 +7,16 @@ TOKEN = os.environ["TG_BOT_TOKEN"]
 CHAT_ID = os.environ["TG_CHAT_ID"]
 
 def send(text: str) -> None:
-    msg = urllib.parse.quote(text)
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={msg}"
-    with urllib.request.urlopen(url) as r:
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+
+    data = urllib.parse.urlencode({
+        "chat_id": CHAT_ID,
+        "text": text.strip()
+    }).encode()
+
+    req = urllib.request.Request(url, data=data)
+
+    with urllib.request.urlopen(req) as r:
         r.read()
 
 if __name__ == "__main__":
