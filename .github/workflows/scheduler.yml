@@ -2,7 +2,7 @@ name: SAVE 24-7
 
 on:
   schedule:
-    - cron: "0 7 * * *"   # ogni giorno 07:00 UTC = 08:00 Italia (in inverno)
+    - cron: "0 7 * * *"
   workflow_dispatch:
 
 jobs:
